@@ -1840,7 +1840,15 @@ defines if the text should be inserted inside the note."
                    (unless (bolp) (insert "\n"))
                    (org-N-empty-lines-before-current (1- empty-lines-number)))
 
-                 (when (and org-noter-insert-selected-text-inside-note selected-text) (insert selected-text)))
+                 (when
+                     (and
+                      org-noter-insert-selected-text-inside-note
+                      selected-text)
+                   (insert
+                    (concat
+                     "#+begin_quote\n"
+                     selected-text
+                     "\n#+end_quote\n"))))
 
              ;; NOTE(nox): Inserting a new note
              (let ((reference-element-cons (org-noter--view-info-reference-for-insertion view-info))
